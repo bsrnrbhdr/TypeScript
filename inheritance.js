@@ -14,11 +14,22 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 var Person = /** @class */ (function () {
-    function Person() {
+    function Person(name) {
+        this._name = name;
     }
     Person.prototype.saveToDB = function () {
         console.log("saved");
     };
+    Object.defineProperty(Person.prototype, "Name", {
+        get: function () {
+            return "hello" + this._name;
+        },
+        set: function (name) {
+            this._name = name;
+        },
+        enumerable: false,
+        configurable: true
+    });
     return Person;
 }());
 var Customer = /** @class */ (function (_super) {
@@ -41,9 +52,11 @@ var Workers = /** @class */ (function (_super) {
     };
     return Workers;
 }(Person));
-var customer = new Customer();
+var customer = new Customer("customer");
 customer.saveToDB();
 customer.sell();
-var worker = new Workers();
+var worker = new Workers("worker");
 worker.saveToDB();
 worker.salary();
+worker.Name = "new name";
+console.log(worker.Name);
